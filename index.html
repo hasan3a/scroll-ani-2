@@ -107,13 +107,7 @@
         }
 
         // Always scroll to top on reload
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual'; // Disable auto scroll restore
-        }
-
-        window.addEventListener('beforeunload', () => {
-            window.scrollTo(0, 0); // Ensures it's at the top before leaving
-        });
+        
 
         window.addEventListener('load', () => {
             window.scrollTo(0, 0); // Forces top scroll on load
