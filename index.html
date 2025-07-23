@@ -85,6 +85,7 @@
         gsap.registerPlugin(SplitText)
         gsap.registerPlugin(ScrollTrigger)
         
+        document.body.classList.add("lock-scroll");
         function lockScroll(duration = 4000) {
             const scrollY = window.scrollY;
 
@@ -102,12 +103,19 @@
                 document.body.style.right = '';
                 document.body.style.width = '';
                 document.body.style.overflow = '';
+                // document.body.classList.remove("lock-scroll");
                 window.scrollTo(0, scrollY);
             }, duration);
         }
 
         // Always scroll to top on reload
-        
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual'; // Disable auto scroll restore
+        }
+
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0); // Ensures it's at the top before leaving
+        });
 
         window.addEventListener('load', () => {
             window.scrollTo(0, 0); // Forces top scroll on load
